@@ -1,5 +1,9 @@
 name: mlenv
 channels:
   - defaults
+dependencies:
+  - nodejs=8.9.3=hd6b2f15_0
+  - vc=14=h0510ff6_3
+  - vs2015_runtime=14.0.25123=3
 prefix: C:\Users\saura\AppData\Local\Continuum\miniconda3\envs\mlenv
 
