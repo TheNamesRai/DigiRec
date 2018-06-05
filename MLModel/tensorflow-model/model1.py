@@ -1,3 +1,6 @@
+## Getting around 92% accuracy
+
+
 import tensorflow as tf 
 
 import time
