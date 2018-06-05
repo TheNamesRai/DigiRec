@@ -1,0 +1,130 @@
+<html>
+	<head>
+		<title>DigiRec</title>
+	</head>
+	<style>
+	html, body{
+		margin:0px;
+		padding:10px;
+	}
+	#main_canvas{
+		margin:auto;
+		height:280px;
+	}
+	#graycanvas{
+		margin-top:-280px;
+		margin-left: 310px;
+		float:left;
+	}
+	#compressed{
+		margin-left: 30px;
+		margin-top:-160px;
+		border:1px solid #000000;
+		width:28px;
+	}
+	canvas{
+		border:1px solid #000000;
+		width:280px;
+	}
+	#actions{
+		width: 100%;
+		margin-top: 20px;
+	}
+	#actions center{
+		width:500px;
+		margin: auto;
+	}
+	#digits{
+		width:100%;
+		margin-top: 20px;
+	}
+	#row{
+		margin-left: 300px;
+		margin-top: 10px;
+	}
+	#digit_wrapper{
+		grid-column-gap: 10px;
+		margin-left: 20px;
+		display: inline-grid;
+		width:100px;
+		height:150px;
+	}
+	#digit_container{
+		width:100px;
+		height:100px;
+		background-color: #e3e3e3;
+		border: 1px solid #d7d7d7;
+	}
+	</style>
+	<body>
+		<div id="main_canvas">
+			<div class="canvas_container" id="canvas"></div>
+			<div class="canvas_container"><canvas id="graycanvas" width="280" height="280"></canvas></div>
+			<div class="canvas_container"><canvas id="compressed" width="28" height="28"></canvas></div>
+		</div>
+		<div id="actions">
+			<center>
+			<button title="GetData" onclick="getData()">GetData</button>
+			<button title="GrayScale" onclick="toGrayScale()">GrayScale</button>
+			<button title="Compress" onclick="compress()">Compress</button>
+			<button title="Clear" onclick="clearCanvas()">Clear</button>
+			</center>
+		</div>
+		<div id="digits">
+			<div id="row">
+				<div id="digit_wrapper">
+					<div id="digit_container"><span></span></div>
+					<div id="digit_probability"></div>
+				</div>
+
+				<div id="digit_wrapper">
+					<div id="digit_container"><span></span></div>
+					<div id="digit_probability"></div>
+				</div>
+
+				<div id="digit_wrapper">
+					<div id="digit_container"><span></span></div>
+					<div id="digit_probability"></div>
+				</div>
+
+				<div id="digit_wrapper">
+					<div id="digit_container"><span></span></div>
+					<div id="digit_probability"></div>
+				</div>
+				
+				<div id="digit_wrapper">
+					<div id="digit_container"><span></span></div>
+					<div id="digit_probability"></div>
+				</div>
+			</div>
+
+			<div id="row">
+				<div id="digit_wrapper">
+					<div id="digit_container"></div>
+					<div id="digit_probability"></div>
+				</div>
+
+				<div id="digit_wrapper">
+					<div id="digit_container"></div>
+					<div id="digit_probability"></div>
+				</div>
+
+				<div id="digit_wrapper">
+					<div id="digit_container"></div>
+					<div id="digit_probability"></div>
+				</div>
+
+				<div id="digit_wrapper">
+					<div id="digit_container"></div>
+					<div id="digit_probability"></div>
+				</div>
+				
+				<div id="digit_wrapper">
+					<div id="digit_container"></div>
+					<div id="digit_probability"></div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+<script type="text/javascript" src="canvas.js"></script>
