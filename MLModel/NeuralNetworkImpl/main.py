@@ -1,14 +1,15 @@
 import numpy as np 
 import time
-import Activation
+from Activation import ActivationFunctions
 from NeuralNetwork import NeuralNetwork
+import CostFunction
 
 #number of neurons in hidden layers
-n_hidden = 10
-n_in = 10
+n_neurons = 3
+n_input = 4
 
 # output layer
-n_output = 10
+n_output = 2
 
 #training examples
 n_sample = 300
@@ -17,13 +18,14 @@ n_sample = 300
 learning_rate = 0.01
 momentum = 0.9
 
-
-m1 = np.array([[2,4] , [3,4]])
-m2 = np.array([[1,2],[2,3]])
-
-print(np.matmul(m1,m2))
-
-print(np.transpose(m1))
+#number of hidden layers
+n_layers = 1 # n_layers >= 1
 
 
-d = NeuralNetwork(3,4)
+m1 = np.array([[2,5] , [3,6]])
+m2 = np.array([[1,4],[7,8]])
+
+
+
+nn = NeuralNetwork(n_input, n_output, n_layers, n_neurons)
+
