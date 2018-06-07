@@ -26,3 +26,6 @@ class NeuralNetwork:
 		weight = np.random.randn(self.n_output , self.n_neurons + 1) * np.sqrt(2 / self.n_output)
 		self.weights.append(weight) 
 
+	def printWeights(self):
+		print(self.weights)
+
