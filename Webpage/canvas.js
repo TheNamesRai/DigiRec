@@ -44,6 +44,7 @@
             var radius = 10; // or whatever
             var fillColor = '#ff0000';
             ctx.fillCircle(x, y, radius, fillColor);
+            fillDigitsCanvas();
         };
         canvas.node.onmouseup = function(e) {
             canvas.isDrawing = false;
@@ -81,16 +82,23 @@ function toGrayScale(){
     grayContext.putImageData(imageData, 0, 0);
 }
 
+function fillDigitsCanvas(){
+    var c = document.getElementById("can");
+    var ctx = c.getContext("2d");
+    var imageData = ctx.getImageData(0,0,c.width, c.height);
+    
+    var canvas1 = document.getElementById("canvas_1");
+    var ctx1 = canvas1.getContext("2d");
+    ctx1.putImageData(imageData, 0, 0);
+    ctx1.scale(0.3,0.3);
+}
 function clearCanvas(){
     var c = document.getElementById("can");
     var ctx = c.getContext("2d");
-    ctx.clearRect(0,0, c.width, c.height);
+    ctx.fillStyle = "#ddd";
+    ctx.fillRect(0,0, c.width, c.height);
 
     var c = document.getElementById("graycanvas");
-    var ctx = c.getContext("2d");
-    ctx.clearRect(0,0, c.width, c.height);
-
-    var c = document.getElementById("compressed");
     var ctx = c.getContext("2d");
     ctx.clearRect(0,0, c.width, c.height);
 }
