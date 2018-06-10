@@ -1,29 +1,48 @@
 import numpy as np 
 import time
-import Activation
+from Activation import ActivationFunctions
 from NeuralNetwork import NeuralNetwork
+from CostFunction import CostFunction
+import Data
+import time
 
-#number of neurons in hidden layers
-n_hidden = 10
-n_in = 10
+start = time.time()
+
+#list of number of neurons in hidden layers
+
+n_neurons = [100]
+n_input = 784
 
 # output layer
 n_output = 10
 
 #training examples
-n_sample = 300
+n_sample = 60000
 
 #hyper parameters
-learning_rate = 0.01
+learning_rate = 3
 momentum = 0.9
 
+epochs = 10
+mini_batch_size = 10
 
-m1 = np.array([[2,4] , [3,4]])
-m2 = np.array([[1,2],[2,3]])
-
-print(np.matmul(m1,m2))
-
-print(np.transpose(m1))
+training_data, testing_data = Data.load_data()
 
 
-d = NeuralNetwork(3,4)
+
+nn = NeuralNetwork(n_input, n_output,  n_neurons)
+
+
+
+#print(nn.feedForward(training_data[0][0]))
+
+nn.train(training_data, epochs, 60000, learning_rate)
+np.save('weights.npy' , nn.weights)
+np.save('biases.npy' , nn.biases)
+#nn.load_file()
+
+nn.evaluate(testing_data)
+
+
+end = time.time()
+print(end -start)
