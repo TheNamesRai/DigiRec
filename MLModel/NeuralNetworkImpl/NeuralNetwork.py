@@ -30,9 +30,9 @@ class NeuralNetwork:
 			x = ActivationFunctions.sigmoid(np.dot(w,x) + b)
 		return x
 
-	def train(self, training_data , epochs, mini_batch_size, learning_rate):
-		self.stochasticGradientDescent(training_data,
-									epochs, mini_batch_size, learning_rate)
+	def train(self, training_data , epochs, mini_batch_size, learning_rate, momentum):
+		self.sgdMomentum(training_data,
+									epochs, learning_rate, momentum)
 
 	def load_file(self):
 		self.weights = np.load('weights.npy')
@@ -62,8 +62,8 @@ class NeuralNetwork:
 	        activation = ActivationFunctions.sigmoid(z)
 	        activations.append(activation)
 
-	    delta = (activations[-1] - Y) * ActivationFunctions.sigmoidDerivative(zs[-1])
-
+	    #delta = (activations[-1] - Y) * ActivationFunctions.sigmoidDerivative(zs[-1])
+	    delta = (activations[-1] - Y)
 
 
 	    gradient_b[-1] = delta
@@ -77,32 +77,36 @@ class NeuralNetwork:
 	        gradient_w[-l] = np.dot(delta, activations[-l-1].transpose())
 	    return (gradient_b, gradient_w)
 
-	def updateMiniBatch(self, mini_batch, learning_rate):
-	    gradient_b = [np.zeros(b.shape) for b in self.biases]
-	    gradient_w = [np.zeros(w.shape) for w in self.weights]
 
-	    for x,y in mini_batch:
-	        delta_b, delta_w = self.backpropagation(x, y)
-	        gradient_b = [gb+db for gb, db in zip(gradient_b, delta_b)]
-	        gradient_w = [gw+dw for gw, dw in zip(gradient_w, delta_w)]
-	    self.weights = [w-(learning_rate/len(mini_batch))*gw
-	                    for w, gw in zip(self.weights, gradient_w)]
-	    self.biases = [b-(learning_rate/len(mini_batch))*gb
-	                   for b, gb in zip(self.biases, gradient_b)]
+	#-----------------------------------------------------------------------------------------
 
+
+
+	def update(self, training_data, learning_rate, momentum, preGrad_b, preGrad_w):
+		gradient_b = [np.zeros(b.shape) for b in self.biases]
+		gradient_w = [np.zeros(w.shape) for w in self.weights]
+		for x,y in training_data:
+			delta_b, delta_w = self.backpropagation(x,y)
+			gradient_b = [gb+db for gb, db in zip(gradient_b, delta_b)]
+			gradient_w = [gw+dw for gw, dw in zip(gradient_w, delta_w)]
+		self.weights = [w-((learning_rate*gw)-(momentum*pw))/len(training_data)
+		                for w, gw, pw in zip(self.weights, gradient_w,preGrad_w)]
+		self.biases = [b-((learning_rate*gb)-(momentum*pb))/len(training_data)
+		               for b, gb,pb in zip(self.biases, gradient_b,preGrad_b)]
+		return gradient_b, gradient_w
 
 	# training_data is a list of tuples - [(x,y),(x2,y2),.....]
-	def stochasticGradientDescent(self,training_data, epochs, mini_batch_size, learning_rate):
-	    m = len(training_data)
-	    for i in range(epochs):
-	        random.shuffle(training_data)
-	        mini_batches = [
-	            training_data[k:k+mini_batch_size]
-	            for k in range(0, m, mini_batch_size)]
-	        for mini_batch in mini_batches:
-	            self.updateMiniBatch(mini_batch, learning_rate)
-	        print("Epoch " +  str(i) + " complete")
-	        self.evaluate(training_data)
+	def sgdMomentum(self, training_data, epochs, learning_rate, momentum):
+		gradient_b = [np.zeros(b.shape) for b in self.biases]
+		gradient_w = [np.zeros(w.shape) for w in self.weights]
+		m = len(training_data)
+		for i in range(epochs):
+			random.shuffle(training_data)
+			gradient_b, gradient_w = self.update(training_data, learning_rate, momentum, gradient_b, gradient_w)
+			print("Epoch " + str(i) + " complete")
+			self.evaluate(training_data)
+
+
 
 
 

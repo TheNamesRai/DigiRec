@@ -23,7 +23,7 @@ n_sample = 60000
 learning_rate = 3
 momentum = 0.9
 
-epochs = 10
+epochs = 25
 mini_batch_size = 10
 
 training_data, testing_data = Data.load_data()
@@ -36,10 +36,10 @@ nn = NeuralNetwork(n_input, n_output,  n_neurons)
 
 #print(nn.feedForward(training_data[0][0]))
 
-nn.train(training_data, epochs, 60000, learning_rate)
-np.save('weights.npy' , nn.weights)
-np.save('biases.npy' , nn.biases)
-#nn.load_file()
+# nn.train(training_data, epochs, 60000, learning_rate , momentum)
+# np.save('weights.npy' , nn.weights)
+# np.save('biases.npy' , nn.biases)
+nn.load_file()
 
 nn.evaluate(testing_data)
 
