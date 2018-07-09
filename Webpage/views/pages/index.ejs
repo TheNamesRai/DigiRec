@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../partials/header.ejs %>
+</head>
+
+<body>
+
+  <% include ../partials/nav.ejs %>
+
+    <div id="main_canvas">
+      <div class="canvas_container" id="canvas"></div>
+      <div id="actions">
+        <center>
+        <button title="GetData" onclick="getData()">GetData</button>
+        <br>
+        <br>
+        <button title="Clear" onclick="clearCanvas()">Clear</button>
+        </center>
+      </div>
+      <div class="canvas_container"><canvas id="graycanvas" width="280" height="280"></canvas></div>
+    </div>
+
+    <div id="digits">
+      <div id="row">
+        <div id="digit_wrapper">
+          <div id="digit_container"><p>1</p></div>
+          <div id="digit_probability"><center>40%</center></div>
+          <canvas class="digits_canvas" id="canvas_1" width="72" height="72"></canvas>
+        </div>
+
+        <div id="digit_wrapper">
+          <div id="digit_container"><p>2</p></div>
+          <div id="digit_probability"></div>
+        </div>
+
+        <div id="digit_wrapper">
+          <div id="digit_container"><p>3</p></div>
+          <div id="digit_probability"></div>
+        </div>
+
+        <div id="digit_wrapper">
+          <div id="digit_container"><p>4</p></div>
+          <div id="digit_probability"></div>
+        </div>
+        
+        <div id="digit_wrapper">
+          <div id="digit_container"><p>5</p></div>
+          <div id="digit_probability"></div>
+        </div>
+      </div>
+
+      <div id="row">
+        <div id="digit_wrapper">
+          <div id="digit_container"><p>6</p></div>
+          <div id="digit_probability"></div>
+        </div>
+
+        <div id="digit_wrapper">
+          <div id="digit_container"><p>7</p></div>
+          <div id="digit_probability"></div>
+        </div>
+
+        <div id="digit_wrapper">
+          <div id="digit_container"><p>8</p></div>
+          <div id="digit_probability"></div>
+        </div>
+
+        <div id="digit_wrapper">
+          <div id="digit_container"><p>9</p></div>
+          <div id="digit_probability"></div>
+        </div>
+        
+        <div id="digit_wrapper">
+          <div id="digit_container"><p>0</p></div>
+          <div id="digit_probability"></div>
+        </div>
+      </div>
+    </div>
+</body>
+</html>
+<script type="text/javascript" src="/js/canvas.js"></script>
