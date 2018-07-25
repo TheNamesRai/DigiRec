@@ -1,4 +1,4 @@
-#main implementation of neural network
+#Implementation is in inprogress
 
 import numpy as np
 import CostFunction
