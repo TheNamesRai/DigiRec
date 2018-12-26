@@ -1,1 +1,1 @@
-# Digit Recognition Web App
+# Digit Recognition Machine learning model.
